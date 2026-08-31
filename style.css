@@ -121,23 +121,32 @@ button:focus-visible {
 
 /* ============================================================== nav ==== */
 
+/* Stacked and centred: the name reads as a masthead rather than a logo in a
+   corner. The toggle is taken out of flow so it cannot pull the centred
+   stack off-axis -- centring is only true if nothing else shares the row. */
 .nav {
-  display: flex; align-items: center; gap: var(--s-5);
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: var(--s-3);
   padding-block: var(--s-5);
+  text-align: center;
 }
 .nav__mark {
   font-family: var(--serif); font-weight: 600; font-size: 20px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  color: var(--text); text-decoration: none;
 }
+.nav__mark:hover { color: var(--accent); }
 .nav__list {
-  list-style: none; display: flex; gap: var(--s-5);
-  margin: 0; padding: 0; margin-left: auto;
+  list-style: none; display: flex; flex-wrap: wrap; justify-content: center;
+  gap: var(--s-5);
+  margin: 0; padding: 0;
   font-size: 15px;
 }
 .nav__list a { color: var(--text-muted); text-decoration: none; }
 .nav__list a:hover { color: var(--text); }
 
 .nav__theme {
+  position: absolute; right: 0; top: var(--s-5);
   width: 36px; height: 36px;
   display: grid; place-items: center;
   border: 1px solid var(--border); border-radius: 50%;
@@ -148,7 +157,15 @@ button:focus-visible {
 
 /* ============================================================= hero ==== */
 
-.hero__body { padding-block: var(--s-8) var(--s-9); max-width: var(--measure); }
+/* Centred, with the measure preserved. Centring a block is not the same as
+   letting its lines run the full width -- long centred lines are the harder
+   thing to read, and this page argues about legibility. */
+.hero__body {
+  padding-block: var(--s-7) var(--s-9);
+  max-width: var(--measure);
+  margin-inline: auto;
+  text-align: center;
+}
 
 .hero__eyebrow {
   font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
@@ -166,7 +183,7 @@ button:focus-visible {
 .hero__pitch { font-size: clamp(18px, 2.2vw, 21px); color: var(--text-muted); }
 .hero__pitch strong { color: var(--text); font-weight: 600; }
 
-.hero__actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-6); }
+.hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-3); margin-top: var(--s-6); }
 
 .btn {
   display: inline-flex; align-items: center;
@@ -185,11 +202,11 @@ button:focus-visible {
 
 /* ========================================================= sections ==== */
 
-.section { padding-block: var(--s-8); border-top: 1px solid var(--border); }
+.section { padding-block: var(--s-8); border-top: 1px solid var(--border); text-align: center; }
 .section__title { font-size: clamp(26px, 3.5vw, 34px); margin-bottom: var(--s-2); }
 .section__sub { color: var(--text-muted); margin-bottom: var(--s-6); }
 
-.prose { max-width: var(--measure); display: grid; gap: var(--s-4); color: var(--text-muted); }
+.prose { max-width: var(--measure); margin-inline: auto; display: grid; gap: var(--s-4); color: var(--text-muted); }
 
 /* auto-fit + minmax: the grid decides its own column count from the space it
    has, so there are no breakpoints to keep in sync with the content. */
@@ -208,6 +225,7 @@ button:focus-visible {
 .skill p  { font-size: 15px; color: var(--text-muted); }
 
 .card {
+  text-align: center;
   background: var(--surface-raised);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -225,7 +243,7 @@ button:focus-visible {
 
 .contact {
   list-style: none; margin: 0; padding: 0;
-  display: flex; flex-wrap: wrap; gap: var(--s-5);
+  display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-5);
   font-size: 17px; font-weight: 500;
 }
 
@@ -235,6 +253,7 @@ button:focus-visible {
   border-top: 1px solid var(--border);
   padding-block: var(--s-6);
   color: var(--text-subtle); font-size: 14px;
+  text-align: center;
 }
 
 /* Motion is decoration here, so it is the first thing to go when someone has

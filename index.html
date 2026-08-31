@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tommy Claffey — Product &amp; UX Designer</title>
+<meta name="description" content="Product and UX designer specialising in design systems, accessibility, and design-to-developer handoff.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- First tab stop on the page. Without it a keyboard user walks the entire nav
+     before reaching content, on every single visit. -->
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hero">
+  <nav class="nav" aria-label="Primary">
+    <span class="nav__mark">TC</span>
+    <ul class="nav__list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <!-- aria-pressed, not aria-label alone: this is a toggle with a state, and
+         a screen reader should announce which state it is in. -->
+    <button type="button" id="theme" class="nav__theme" aria-pressed="false">
+      <span aria-hidden="true">◐</span>
+      <span class="sr-only">Dark mode</span>
+    </button>
+  </nav>
+
+  <div class="hero__body">
+    <p class="hero__eyebrow">Product &amp; UX Designer · Metro Detroit &amp; remote</p>
+    <h1 class="hero__name">Tommy Claffey</h1>
+    <p class="hero__pitch">
+      I build <strong>design systems</strong> — the components, tokens and handoff
+      documentation a team actually builds from. Finishing a B.S. in User
+      Experience at Arizona State.
+    </p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="#work">See the work</a>
+      <a class="btn" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section" id="about">
+    <h2 class="section__title">About</h2>
+    <div class="prose">
+      <p>
+        I came to design from running businesses, which is why I care less about
+        how a screen looks in isolation and more about whether an engineer can
+        build it on Monday. A lot of my work is the unglamorous half of design
+        systems: auditing what already exists, finding where two components
+        quietly disagree, and writing the decision down so nobody has to guess.
+      </p>
+      <p>
+        I'm dyslexic. That's why accessibility isn't a checklist item for me, and
+        why I spend more time on whether an interface is legible than on whether
+        it's pretty.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <h2 class="section__title">Skills</h2>
+    <p class="section__sub">What I do, rather than a wall of logos.</p>
+    <ul class="skills">
+      <li class="skill">
+        <h3>Design systems</h3>
+        <p>Token architecture, component contracts, variant modelling, migration.</p>
+      </li>
+      <li class="skill">
+        <h3>Accessibility</h3>
+        <p>WCAG, focus and state design, touch targets, meaning that survives without colour.</p>
+      </li>
+      <li class="skill">
+        <h3>Research</h3>
+        <p>Card sorts, usability testing, information architecture, synthesis into decisions.</p>
+      </li>
+      <li class="skill">
+        <h3>Design-to-dev handoff</h3>
+        <p>Specs an engineer can build from, with readiness stated per component.</p>
+      </li>
+      <li class="skill">
+        <h3>Front-end</h3>
+        <p>HTML, CSS, JavaScript, React and TypeScript. I ship what I design.</p>
+      </li>
+      <li class="skill">
+        <h3>Tools</h3>
+        <p>Figma, Framer, Git, VS Code.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section" id="work">
+    <h2 class="section__title">Work</h2>
+    <p class="section__sub">Three projects, each self-initiated.</p>
+    <div class="cards">
+
+      <article class="card">
+        <p class="card__tag">B2B SaaS · design system</p>
+        <h3 class="card__title">Growth</h3>
+        <p>
+          A cross-channel marketing dashboard and the 31-component system behind
+          it. Three token tiers, a migration across 78 instances, and seven
+          defects found in my own work — including a disabled state that was
+          invisible to the user.
+        </p>
+        <p class="card__links">
+          <a href="https://github.com/tommyclaffey/Growth">View the code</a>
+        </p>
+      </article>
+
+      <article class="card">
+        <p class="card__tag">B2C · voice</p>
+        <h3 class="card__title">Mumble</h3>
+        <p>
+          Voice-first note taking, built around read-aloud that states your place
+          as “line 4 of 18” rather than as a timeline. Speaker attribution flags
+          its own low-confidence guesses instead of hiding them.
+        </p>
+      </article>
+
+      <article class="card">
+        <p class="card__tag">Kiosk · accessibility</p>
+        <h3 class="card__title">The Broad</h3>
+        <p>
+          Museum wayfinding kiosks. A card sort, a usability test with real users,
+          and one research recommendation I chose to override — with the reasoning
+          written down rather than quietly dropped.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2 class="section__title">Contact</h2>
+    <p class="section__sub">Open to product and UX design roles — remote or Metro Detroit.</p>
+    <ul class="contact">
+      <li><a href="mailto:thomasclaffey@gmail.com">Email</a></li>
+      <li><a href="https://github.com/tommyclaffey">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/tommyclaffey/">LinkedIn</a></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© <span id="year">2026</span> Tommy Claffey · Hand-built. No framework, no build step.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

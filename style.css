@@ -109,19 +109,15 @@ button:focus-visible {
 
 /* ============================================================== nav ==== */
 
-/* Stacked and centred: the name reads as a masthead rather than a logo in a
-   corner. */
+/* Links only. The name was here as a masthead AND immediately below as the
+   h1 — the same words twice in one viewport, which reads as a template that
+   was not finished rather than as branding. The h1 is the identity; a
+   single-page site does not need a wordmark pointing at content three inches
+   away. */
 .nav {
-  display: flex; flex-direction: column; align-items: center; gap: var(--s-3);
+  display: flex; justify-content: center;
   padding-block: var(--s-5);
-  text-align: center;
 }
-.nav__mark {
-  font-family: var(--serif); font-weight: 600; font-size: 20px;
-  letter-spacing: 0.01em;
-  color: var(--text); text-decoration: none;
-}
-.nav__mark:hover { color: var(--accent); }
 .nav__list {
   list-style: none; display: flex; flex-wrap: wrap; justify-content: center;
   gap: var(--s-5);

@@ -2,13 +2,12 @@
 
 A single-page personal site. Built for the Career Accelerator assignment.
 
-**Plain HTML, CSS and JavaScript.** No framework, no build step, no
+**HTML and CSS only.** No JavaScript, no framework, no build step, no
 dependencies — open `index.html` in a browser and it runs.
 
 ```
 index.html    structure
 style.css     tokens + layout
-script.js     footer year, dark-mode toggle
 ```
 
 ## Decisions worth explaining
@@ -29,12 +28,12 @@ wrong.
 - Skip link that is actually visible on focus
 - One `:focus-visible` style covering every interactive element
 - 44px minimum on buttons
-- Dark mode follows `prefers-color-scheme`, with an explicit override
-- `aria-pressed` on the toggle, kept in sync
+- Dark mode via `prefers-color-scheme` — no toggle needed, and no JavaScript
 - `prefers-reduced-motion` honoured
 
-**`localStorage` in a `try`.** It throws in some privacy modes. A dead theme
-toggle is a smaller problem than a script that fails to run at all.
+**Dark mode without JavaScript.** Redefining the tier-2 token names inside one
+media query is the entire implementation. Nothing else in the stylesheet knows
+which mode is active, which is the payoff for having the token layer at all.
 
 ## Status
 

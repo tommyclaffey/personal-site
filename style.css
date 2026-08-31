@@ -43,24 +43,18 @@
   --serif: Fraunces, Georgia, "Times New Roman", serif;
 }
 
-/* Dark mode follows the system by default, and the toggle overrides it. Both
-   paths set the same tier-2 names, so no rule below has to know which is
-   active. */
+/* Dark mode is CSS only -- it follows whatever the reader already told their
+   operating system. There is no toggle, because a toggle needs JavaScript and
+   this page has none. Redefining the tier-2 names is the whole implementation;
+   no rule below this block knows which mode is active. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root {
     --surface: #14140F; --surface-raised: #1C1C16; --surface-sunken: #100F0B;
     --text: #F2F0E9; --text-muted: #A8A69C; --text-subtle: #6E6C63;
     --border: #2C2B24;
     --accent: #6FC3A8; --accent-press: #8FD4BE; --accent-tint: #17332A;
     --focus: #6FC3A8;
   }
-}
-:root[data-theme="dark"] {
-  --surface: #14140F; --surface-raised: #1C1C16; --surface-sunken: #100F0B;
-  --text: #F2F0E9; --text-muted: #A8A69C; --text-subtle: #6E6C63;
-  --border: #2C2B24;
-  --accent: #6FC3A8; --accent-press: #8FD4BE; --accent-tint: #17332A;
-  --focus: #6FC3A8;
 }
 
 /* ============================================================ base ==== */
@@ -92,12 +86,6 @@ button:focus-visible {
   border-radius: 3px;
 }
 
-.sr-only {
-  position: absolute; width: 1px; height: 1px;
-  padding: 0; margin: -1px; overflow: hidden;
-  clip-path: inset(50%); white-space: nowrap;
-}
-
 /* Hidden until focused, then real and visible. A skip link that never shows
    itself is decoration. */
 .skip {
@@ -122,10 +110,8 @@ button:focus-visible {
 /* ============================================================== nav ==== */
 
 /* Stacked and centred: the name reads as a masthead rather than a logo in a
-   corner. The toggle is taken out of flow so it cannot pull the centred
-   stack off-axis -- centring is only true if nothing else shares the row. */
+   corner. */
 .nav {
-  position: relative;
   display: flex; flex-direction: column; align-items: center; gap: var(--s-3);
   padding-block: var(--s-5);
   text-align: center;
@@ -145,15 +131,6 @@ button:focus-visible {
 .nav__list a { color: var(--text-muted); text-decoration: none; }
 .nav__list a:hover { color: var(--text); }
 
-.nav__theme {
-  position: absolute; right: 0; top: var(--s-5);
-  width: 36px; height: 36px;
-  display: grid; place-items: center;
-  border: 1px solid var(--border); border-radius: 50%;
-  background: var(--surface-raised); color: var(--text-muted);
-  font-size: 15px; cursor: pointer;
-}
-.nav__theme:hover { color: var(--text); border-color: var(--text-subtle); }
 
 /* ============================================================= hero ==== */
 

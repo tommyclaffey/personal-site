@@ -37,7 +37,12 @@
   --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 72px; --s-9: 112px;
 
   --radius: 10px;
-  --measure: 62ch;          /* line length, not a container width */
+  /* An absolute width, deliberately NOT ch. `ch` resolves against the
+     element's own font-size, so 62ch means ~620px on 17px body text and
+     ~1050px on a 34px heading -- the same token producing two different
+     widths depending on what it lands on. For a shared column edge it has to
+     be one number. 38rem is that number, sized to the body measure. */
+  --measure: 38rem;
 
   --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --serif: Fraunces, Georgia, "Times New Roman", serif;
@@ -221,6 +226,19 @@ button:focus-visible {
 .section__title + .skills,
 .section__title + .cards,
 .section__title + .contact { margin-top: var(--s-6); }
+
+/* About is the only long-form section, so it is set as an editorial block:
+   heading and body share one left edge, and the block as a whole is centred
+   on the page.
+
+   A centred heading over left-aligned prose is the awkward middle -- it reads
+   as a centred layout that failed rather than as a decision. Either the
+   heading joins the text's edge or the text joins the heading's centre, and
+   the text cannot be centred without giving every line a different starting
+   point. So the heading moves. */
+#about { text-align: left; }
+#about .section__title { max-width: var(--measure); margin-inline: auto; }
+#about .section__sub { max-width: var(--measure); margin-inline: auto; }
 
 /* Left-aligned, inside a centred block.
 

@@ -202,15 +202,6 @@ button:focus-visible {
   text-align: center;
 }
 
-/* Sits under the name now, so it is a subtitle rather than an eyebrow: the
-   two are one unit and are spaced as one. The gap to the pitch below is the
-   larger of the two, because that IS the break in thought -- who he is, then
-   what he does. Spacing carries the grouping; nothing else has to. */
-.hero__eyebrow {
-  font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--text-muted);
-  margin-bottom: var(--s-6);
-}
 
 /* clamp() rather than breakpoints: the size is continuous, so there is no
    width at which the heading is briefly wrong.
@@ -223,8 +214,11 @@ button:focus-visible {
 .hero__name {
   font-size: clamp(36px, 8vw, 84px);
   letter-spacing: -0.02em;
-  /* Tight to the role line -- they read as one block. */
-  margin-bottom: var(--s-3);
+  /* The pitch is the only thing under the name now, so the two are the unit.
+     12px was tight because a small caps role line sat between them; with the
+     subhead carrying the weight directly, it needs room to be its own line
+     rather than a caption. */
+  margin-bottom: var(--s-4);
   /* Breaks a long name across lines rather than out of the viewport, if a
      narrower screen than I tested ever turns up. */
   overflow-wrap: break-word;

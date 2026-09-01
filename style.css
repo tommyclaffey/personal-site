@@ -38,6 +38,10 @@
 
   --container: 1040px;   /* one page-wide column, used by every band */
   --radius: 10px;
+  /* Was used by the nav before it existed. An undefined custom property makes
+     the whole declaration invalid, so border-radius silently fell back to 0 --
+     square corners, no error, nothing in the console. */
+  --radius-pill: 999px;
   /* An absolute width, deliberately NOT ch. `ch` resolves against the
      element's own font-size, so 62ch means ~620px on 17px body text and
      ~1050px on a 34px heading -- the same token producing two different
@@ -138,38 +142,45 @@ button:focus-visible {
 
    Full-bleed like the other bands, so the background crosses the viewport and
    the list inside carries the container width. */
-/* Dark, not white. White on the hero's warm tint is a 17-point difference --
-   technically a contrast, visually nothing, and it read as the same surface.
-   A header either reads as its own element or it should not have a background
-   at all; a barely-there one is the worst of both. */
+/* A floating capsule rather than an edge-to-edge bar.
+
+   The background moves off .nav and onto .nav__list, so the dark shape hugs
+   its four links instead of spanning the container. A full-width bar with
+   rounded corners reads as a bar someone rounded; a shape sized to its
+   contents reads as an object. .nav keeps only the job of centring it.
+
+   Ink, not white: white on the hero's warm tint is a 17-point difference --
+   technically a contrast, visually the same surface. */
 .nav {
-  background: var(--ink);
-  padding-block: var(--s-3);
+  display: flex;
+  justify-content: center;
+  padding-block: var(--s-5);
 }
-/* ONE rule. This was two, and the second carried `margin: 0; padding: 0`,
-   which wiped the max-width centring set by the first -- the same shorthand
-   collision as the card grids. Two rules for one element is how that happens;
-   merging them removes the possibility rather than fixing the symptom. */
+
 .nav__list {
   list-style: none;
   display: flex; flex-wrap: wrap; justify-content: center;
-  gap: var(--s-5);
-  max-width: var(--container);
-  margin-block: 0; margin-inline: auto;
-  padding-block: 0; padding-inline: var(--s-5);
+  gap: var(--s-1);
+  background: var(--ink);
+  border-radius: var(--radius-pill);
+  /* Padding is smaller than the links' own, so the capsule sits close around
+     them -- the links carry the tap target, the capsule only carries the
+     shape. */
+  padding: var(--s-1) var(--s-2);
+  margin: 0;
+  max-width: calc(100% - var(--s-8));
   font-size: 15px;
 }
-/* Light on dark. Not pure white -- paper-warm sits better against ink and
-   matches the page's own off-white rather than introducing a new one. */
+
 .nav__list a {
   color: var(--paper-warm); text-decoration: none;
   display: inline-flex; align-items: center;
-  min-height: 40px; padding-inline: var(--s-2);
-  border-radius: var(--radius);
+  min-height: 40px; padding-inline: var(--s-4);
+  border-radius: var(--radius-pill);
 }
-.nav__list a:hover { color: #FFFFFF; background: rgb(255 255 255 / 0.10); }
-/* The focus ring is the accent green, which disappears on ink. On a dark
-   surface the ring has to be light to be a ring at all. */
+.nav__list a:hover { color: #FFFFFF; background: rgb(255 255 255 / 0.12); }
+/* The accent green is invisible on ink, so the ring has to go light on the
+   one element that most needs one. */
 .nav__list a:focus-visible { outline-color: var(--paper-warm); }
 
 

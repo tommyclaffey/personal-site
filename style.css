@@ -212,7 +212,33 @@ button:focus-visible {
 .section__title { font-size: clamp(24px, 3.5vw, 34px); margin-bottom: var(--s-2); text-wrap: balance; }
 .section__sub { color: var(--text-muted); margin-bottom: var(--s-6); }
 
-.prose { max-width: var(--measure); margin-inline: auto; display: grid; gap: var(--s-4); color: var(--text-muted); }
+/* Sections with a sub-line get 32px between the heading and the content,
+   because the sub carries it. About has no sub, so its heading sat 8px off
+   its first paragraph -- the same heading with two different amounts of air
+   under it depending on whether the next element happened to exist. The
+   spacing belongs to the gap, not to whatever is filling it. */
+.section__title + .prose,
+.section__title + .skills,
+.section__title + .cards,
+.section__title + .contact { margin-top: var(--s-6); }
+
+/* Left-aligned, inside a centred block.
+
+   Centring is fine for a heading or a one-line sub -- the eye takes those in
+   whole. It is wrong for a paragraph: every line starts at a different x, so
+   the eye has to hunt for the beginning of each one instead of returning to a
+   fixed edge. That cost is small for most readers and large for some, and
+   this is the section that says I spend more time on legibility than on
+   whether it's pretty. Centring it would contradict the sentence in it.
+
+   The BLOCK stays centred on the page. Only the text inside is aligned. */
+.prose {
+  max-width: var(--measure);
+  margin-inline: auto;
+  display: grid; gap: var(--s-5);
+  color: var(--text-muted);
+  text-align: left;
+}
 
 /* Skills: auto-fit is right here. Six items divide evenly into 3, 2 or 1
    column, so whatever count the grid picks, no row is left short. */
@@ -252,7 +278,9 @@ button:focus-visible {
 .skill p  { font-size: 15px; color: var(--text-muted); }
 
 .card {
-  text-align: center;
+  /* Tag and title centred (below), body left. Three or four centred lines
+     are already enough to make every line start somewhere new. */
+  text-align: left;
   background: var(--surface-raised);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -260,12 +288,13 @@ button:focus-visible {
   display: flex; flex-direction: column; gap: var(--s-3);
 }
 .card__tag {
+  text-align: center;
   font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
   text-transform: uppercase; color: var(--accent);
 }
-.card__title { font-size: 24px; }
+.card__title { font-size: 24px; text-align: center; }
 .card p { font-size: 15px; color: var(--text-muted); }
-.card__links { margin-top: auto; padding-top: var(--s-2); font-size: 15px; }
+.card__links { margin-top: auto; padding-top: var(--s-3); font-size: 15px; text-align: center; }
 .card__links a { font-weight: 500; }
 
 /* Text links are the easiest thing on a page to miss with a thumb. These get

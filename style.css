@@ -148,17 +148,24 @@ button:focus-visible {
 /* Centred, with the measure preserved. Centring a block is not the same as
    letting its lines run the full width -- long centred lines are the harder
    thing to read, and this page argues about legibility. */
+/* Wider than the prose measure. The pitch is display copy, read once at a
+   glance rather than settled into, and at --measure it broke to four short
+   centred lines. Wider gives three fuller ones. */
 .hero__body {
-  padding-block: var(--s-7) var(--s-9);
-  max-width: var(--measure);
+  padding-block: var(--s-8) var(--s-9);
+  max-width: 46rem;
   margin-inline: auto;
   text-align: center;
 }
 
+/* Sits under the name now, so it is a subtitle rather than an eyebrow: the
+   two are one unit and are spaced as one. The gap to the pitch below is the
+   larger of the two, because that IS the break in thought -- who he is, then
+   what he does. Spacing carries the grouping; nothing else has to. */
 .hero__eyebrow {
   font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--text-subtle);
-  margin-bottom: var(--s-4);
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: var(--s-6);
 }
 
 /* clamp() rather than breakpoints: the size is continuous, so there is no
@@ -172,16 +179,24 @@ button:focus-visible {
 .hero__name {
   font-size: clamp(36px, 8vw, 84px);
   letter-spacing: -0.02em;
-  margin-bottom: var(--s-4);
+  /* Tight to the role line -- they read as one block. */
+  margin-bottom: var(--s-3);
   /* Breaks a long name across lines rather than out of the viewport, if a
      narrower screen than I tested ever turns up. */
   overflow-wrap: break-word;
   text-wrap: balance;
 }
-.hero__pitch { font-size: clamp(17px, 2.2vw, 21px); color: var(--text-muted); text-wrap: pretty; }
+/* Balanced so the three lines come out near-equal instead of leaving a short
+   orphan on the last one, which is the failure mode of centred display copy. */
+.hero__pitch {
+  font-size: clamp(17px, 2.2vw, 21px);
+  line-height: 1.5;
+  color: var(--text-secondary);
+  text-wrap: balance;
+}
 .hero__pitch strong { color: var(--text); font-weight: 600; }
 
-.hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-3); margin-top: var(--s-6); }
+.hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-3); margin-top: var(--s-7); }
 
 .btn {
   display: inline-flex; align-items: center;

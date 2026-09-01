@@ -587,7 +587,14 @@ button:focus-visible {
 }
 .card__title { font-size: 24px; text-align: center; }
 .card p { font-size: 15px; color: var(--text-muted); }
-.card__links { margin-top: auto; padding-top: var(--s-3); font-size: 15px; text-align: center; }
+/* Two links on one card, one on the others. margin-top: auto pins the row to
+   the bottom of every card regardless, so the cards' link rows line up across
+   the row even though their body copy differs in length. */
+.card__links {
+  margin-top: auto; padding-top: var(--s-3);
+  font-size: 15px; text-align: center;
+}
+.card__sep { color: var(--text-subtle); margin-inline: var(--s-2); }
 .card__links a { font-weight: 500; }
 
 /* Text links are the easiest thing on a page to miss with a thumb. These get

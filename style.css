@@ -153,12 +153,6 @@
 
 body {
   margin: 0;
-  /* Belt and braces. Scroll anchoring lets the browser silently adjust the
-     scroll position when content above the viewport changes size -- helpful
-     while reading, and indistinguishable from a bug right after an anchor
-     jump. The font fix above removes the reflow that triggered it; this
-     removes the mechanism as well. */
-  overflow-anchor: none;
   background: var(--surface);
   color: var(--text);
   font: 400 17px/1.65 var(--sans);

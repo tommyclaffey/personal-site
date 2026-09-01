@@ -214,12 +214,29 @@ button:focus-visible {
 
 .prose { max-width: var(--measure); margin-inline: auto; display: grid; gap: var(--s-4); color: var(--text-muted); }
 
-/* auto-fit + minmax: the grid decides its own column count from the space it
-   has, so there are no breakpoints to keep in sync with the content. */
-.skills, .cards {
+/* Skills: auto-fit is right here. Six items divide evenly into 3, 2 or 1
+   column, so whatever count the grid picks, no row is left short. */
+.skills {
   display: grid; gap: var(--s-4);
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   list-style: none; margin: 0; padding: 0;
+}
+
+/* Cards: THREE items, so this one needs a breakpoint and auto-fit is wrong.
+   At two columns the third card is stranded alone in row two beside a dead
+   half-width gap -- and auto-fit cannot avoid it, because the grid has no
+   idea how many items it is about to hold. Three columns or one, never two.
+
+   Worth saying plainly: the rest of this page has no breakpoints because
+   nothing else needed one. This does. "No media queries" is a nice property,
+   not a rule to defend past the point where it produces a worse layout. */
+.cards {
+  display: grid; gap: var(--s-4);
+  grid-template-columns: 1fr;
+  list-style: none; margin: 0; padding: 0;
+}
+@media (min-width: 900px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* Raised, not sunken. These used to be sunken tiles on a paper section; the
@@ -251,11 +268,21 @@ button:focus-visible {
 .card__links { margin-top: auto; padding-top: var(--s-2); font-size: 15px; }
 .card__links a { font-weight: 500; }
 
+/* Text links are the easiest thing on a page to miss with a thumb. These get
+   a real 44px target and their own padding, so the tappable area matches what
+   the eye reads as the control rather than just the glyphs. */
 .contact {
   list-style: none; margin: 0; padding: 0;
-  display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-5);
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: var(--s-2) var(--s-3);
   font-size: 17px; font-weight: 500;
 }
+.contact a {
+  display: inline-flex; align-items: center;
+  min-height: 44px; padding-inline: var(--s-3);
+  border-radius: var(--radius);
+}
+.contact a:hover { background: var(--surface-raised); }
 
 /* =========================================================== footer ==== */
 

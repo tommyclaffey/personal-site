@@ -283,7 +283,27 @@ button:focus-visible {
 /* Alternating bands rather than hairlines. A 1px rule separates sections in
    the sense that a reader could find it if asked to; a change of surface
    separates them at a glance, which is the actual job. */
+/* Anchor targets get a little air above them so a heading does not sit flush
+   against the top edge after a jump. */
+main > section { scroll-margin-top: var(--s-5); }
+
 .section { padding-block: var(--s-8); text-align: center; }
+
+/* The last section carries extra room below it, sized to the window.
+
+   Without it the page is shorter than (anchor position + window height), so
+   the browser physically cannot bring a lower section to the top -- it
+   scrolls as far as it can and stops. If you were already near the bottom
+   that means the page moves UP, which reads as a broken link. It is not the
+   link; it is that there is nothing left to scroll.
+
+   vh rather than a fixed value, because how much is needed depends entirely
+   on the window height -- but capped at 340px, or a large monitor turns it
+   into a void. That cap is a trade: it covers windows up to roughly 1250px
+   tall, and past that the last sections still cannot reach the very top.
+   Buying those cases would cost more empty space than the problem is worth.
+   Every long single-page site has this; the fix is proportion, not perfection. */
+#contact { padding-bottom: max(var(--s-8), min(30vh, 340px)); }
 .section:nth-of-type(even) { background: var(--surface-sunken); }
 
 /* No borders anywhere. Every boundary is now a change of surface, and a rule

@@ -164,5 +164,27 @@
 </footer>
 
 
+
+<style>
+#dbg{position:fixed;left:8px;bottom:8px;z-index:9999;background:#111;color:#0f0;
+font:12px/1.5 ui-monospace,Menlo,monospace;padding:10px 12px;border-radius:8px;
+max-width:min(560px,90vw);white-space:pre-wrap;pointer-events:none}
+</style>
+<div id="dbg">scroll to the very top, then click a nav link…</div>
+<script>
+const d=document.getElementById('dbg'); const H=()=>document.body.scrollHeight;
+let L=[]; const show=()=>d.textContent=L.slice(-16).join('\n');
+L.push(`window=${innerHeight} page=${H()} max=${H()-innerHeight}`); show();
+document.querySelectorAll('.nav__list a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    const id=a.getAttribute('href').slice(1);
+    const el=document.getElementById(id);
+    L.push(`--- #${id} fromY=${Math.round(scrollY)} target=${Math.round(el.getBoundingClientRect().top+scrollY)} max=${H()-innerHeight}`);
+    const t0=Date.now();
+    [0,60,200,600,1400].forEach(ms=>setTimeout(()=>{
+      L.push(`   +${Date.now()-t0}ms y=${Math.round(scrollY)} page=${H()}`); show();},ms));
+  });
+});
+</script>
 </body>
 </html>

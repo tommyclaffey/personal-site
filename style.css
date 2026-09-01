@@ -340,15 +340,31 @@ button:focus-visible {
   display: grid;
   gap: var(--s-6);
 }
+/* The photo is wrapped so it can be taken OUT of layout on the wide screen.
+
+   It used to size its own grid row: height: 100% cannot resolve against an
+   indefinite row, so the browser fell back to the image's intrinsic height
+   and the row grew to fit it. That makes the About section's height depend on
+   a resource that arrives late -- and when it lands, the page height changes
+   under a scroll position that was already set, so the browser clamps and the
+   view jumps. From the top of the page that is the whole distance; once
+   you've scrolled, the image is already decoded and nothing moves. Which is
+   exactly the symptom.
+
+   Absolutely positioning it makes the row height depend on the TEXT alone, so
+   the layout is final before the image exists. */
+.about__media { border-radius: var(--radius); overflow: hidden; }
+
 .about__photo {
   width: 100%;
   height: auto;
-  border-radius: var(--radius);
+  display: block;
   /* The source is a 1003x1568 portrait. Constraining it on the narrow layout
      stops a full-width face taking the whole first screen of the section. */
   max-width: 15rem;
   margin-inline: auto;
 }
+.about__media { max-width: 15rem; margin-inline: auto; }
 
 @media (min-width: 800px) {
   .about {
@@ -368,7 +384,16 @@ button:focus-visible {
   /* Fills the column, top of the heading to the last line of text. object-fit
      crops rather than distorts, and the position keeps the face in frame as
      the text column grows or shrinks. */
+  .about__media {
+    position: relative;
+    /* A floor, so a short text column still gives the photo a sensible shape
+       rather than collapsing it. */
+    min-height: 22rem;
+  }
   .about__photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
     height: 100%;
     max-width: none;
     object-fit: cover;

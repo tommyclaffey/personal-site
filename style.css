@@ -251,9 +251,25 @@ button:focus-visible {
   display: grid;
   gap: var(--s-6);
 }
+.about__photo {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  /* The source is a 1003x1568 portrait. Constraining it on the narrow layout
+     stops a full-width face taking the whole first screen of the section. */
+  max-width: 15rem;
+  margin-inline: auto;
+}
+
 @media (min-width: 800px) {
   .about {
-    grid-template-columns: 17rem 1fr;
+    /* Text column IS the measure; the photo takes whatever is left.
+       Sizing it the other way round (photo fixed, text 1fr) left the prose
+       capped at --measure inside a wider column, so its right edge stopped
+       short of the container edge that every other section meets. Fixing the
+       text column instead makes the right edge line up without letting the
+       line length grow. */
+    grid-template-columns: 1fr var(--measure);
     gap: var(--s-7);
     /* stretch, not start: the photo's column has to be as tall as the text
        column for the image to fill it. `start` would collapse it to its own
@@ -269,16 +285,6 @@ button:focus-visible {
     object-fit: cover;
     object-position: 50% 25%;
   }
-}
-
-.about__photo {
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius);
-  /* The source is a 1003x1568 portrait. Constraining it on the narrow layout
-     stops a full-width face taking the whole first screen of the section. */
-  max-width: 15rem;
-  margin-inline: auto;
 }
 
 /* The heading lives inside the text column now, so it needs no width of its

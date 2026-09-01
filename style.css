@@ -238,8 +238,11 @@ button:focus-visible {
   /* Larger than before. One short line has to hold the space a paragraph used
      to, and at 21px it read as a caption under the name rather than as the
      line the page is built around. */
-  font-size: clamp(18px, 2.4vw, 24px);
-  line-height: 1.4;
+  /* 24 -> 20. It is a subhead under a 72px name, not a second headline; at
+     24 it was closer in size to the About body copy's role than to a caption
+     line, which made the hero read as two competing statements again. */
+  font-size: clamp(16px, 1.9vw, 20px);
+  line-height: 1.45;
   color: var(--text);
   text-wrap: balance;
 }

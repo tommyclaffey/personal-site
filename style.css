@@ -157,13 +157,23 @@ button:focus-visible {
 }
 
 /* clamp() rather than breakpoints: the size is continuous, so there is no
-   width at which the heading is briefly wrong. */
+   width at which the heading is briefly wrong.
+
+   The floor is 36px, not 44. A clamp minimum is a floor the text cannot go
+   below no matter how narrow the screen gets, so it is the one number in a
+   fluid scale that can still overflow. At 44px "Tommy Claffey" needs roughly
+   300px and a 320px phone offers 272px after padding -- the fluid middle was
+   never the risk, the floor was. */
 .hero__name {
-  font-size: clamp(44px, 8vw, 84px);
+  font-size: clamp(36px, 8vw, 84px);
   letter-spacing: -0.02em;
   margin-bottom: var(--s-4);
+  /* Breaks a long name across lines rather than out of the viewport, if a
+     narrower screen than I tested ever turns up. */
+  overflow-wrap: break-word;
+  text-wrap: balance;
 }
-.hero__pitch { font-size: clamp(18px, 2.2vw, 21px); color: var(--text-muted); }
+.hero__pitch { font-size: clamp(17px, 2.2vw, 21px); color: var(--text-muted); text-wrap: pretty; }
 .hero__pitch strong { color: var(--text); font-weight: 600; }
 
 .hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-3); margin-top: var(--s-6); }
@@ -196,7 +206,7 @@ button:focus-visible {
    hero and About are both paper, so that seam is the one place a line is
    doing work. */
 .section:first-of-type { border-top: 1px solid var(--border); }
-.section__title { font-size: clamp(26px, 3.5vw, 34px); margin-bottom: var(--s-2); }
+.section__title { font-size: clamp(24px, 3.5vw, 34px); margin-bottom: var(--s-2); text-wrap: balance; }
 .section__sub { color: var(--text-muted); margin-bottom: var(--s-6); }
 
 .prose { max-width: var(--measure); margin-inline: auto; display: grid; gap: var(--s-4); color: var(--text-muted); }

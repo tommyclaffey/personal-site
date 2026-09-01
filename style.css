@@ -101,12 +101,11 @@ button:focus-visible {
 
 /* =========================================================== layout ==== */
 
-/* The hero and footer text are constrained directly. Sections are NOT --
-   they run the full viewport so their background can be a band, and their
-   direct children carry the measure instead. Constraining the section itself
-   would stop its background at the content edge, which is a stripe, not a
-   band. */
-.hero, .footer > p {
+/* Nothing that carries a band background is constrained -- those run the full
+   viewport, and their children carry the measure instead. Constraining the
+   band itself would stop its background at the content edge, which is a
+   stripe, not a band. */
+.nav, .footer > p {
   max-width: 1040px;
   margin-inline: auto;
   padding-inline: var(--s-5);
@@ -195,17 +194,21 @@ button:focus-visible {
 
 /* ========================================================= sections ==== */
 
+/* The hero is the first band, not a neutral run-up to them. It and About were
+   both paper with a hairline between, so the one boundary a reader meets first
+   was the one with the least contrast -- the rhythm started on the third
+   screen. Tinting the hero makes every boundary on the page a colour change,
+   including the first. */
+.hero { background: var(--surface-sunken); }
+
 /* Alternating bands rather than hairlines. A 1px rule separates sections in
    the sense that a reader could find it if asked to; a change of surface
    separates them at a glance, which is the actual job. */
 .section { padding-block: var(--s-8); text-align: center; }
 .section:nth-of-type(even) { background: var(--surface-sunken); }
 
-/* One rule, on the first section only. Everywhere else the colour change is
-   the boundary, and a border on top of it is the same statement twice. The
-   hero and About are both paper, so that seam is the one place a line is
-   doing work. */
-.section:first-of-type { border-top: 1px solid var(--border); }
+/* No borders anywhere. Every boundary is now a change of surface, and a rule
+   drawn on top of one is the same statement twice. */
 .section__title { font-size: clamp(24px, 3.5vw, 34px); margin-bottom: var(--s-2); text-wrap: balance; }
 .section__sub { color: var(--text-muted); margin-bottom: var(--s-6); }
 

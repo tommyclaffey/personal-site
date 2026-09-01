@@ -283,10 +283,6 @@ button:focus-visible {
 /* Alternating bands rather than hairlines. A 1px rule separates sections in
    the sense that a reader could find it if asked to; a change of surface
    separates them at a glance, which is the actual job. */
-/* Anchor targets get a little air above them so a heading does not sit flush
-   against the top edge after a jump. */
-main > section { scroll-margin-top: var(--s-5); }
-
 .section { padding-block: var(--s-8); text-align: center; }
 
 /* NO extra bottom padding here, deliberately.
@@ -301,8 +297,9 @@ main > section { scroll-margin-top: var(--s-5); }
    imprecision is visible to someone who clicks a nav link on a very tall
    window and notices they landed 200px off. Reverted.
 
-   scroll-margin-top stays -- it costs nothing and keeps a heading off the
-   top edge after a jump. */
+   scroll-margin-top has also been removed, to rule it out as a cause of the
+   reported bouncing. There are now no scroll-affecting properties on this
+   page at all -- anchors behave exactly as the browser's default. */
 .section:nth-of-type(even) { background: var(--surface-sunken); }
 
 /* No borders anywhere. Every boundary is now a change of surface, and a rule

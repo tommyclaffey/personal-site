@@ -217,12 +217,13 @@ button:focus-visible {
 .section__title { font-size: clamp(24px, 3.5vw, 34px); margin-bottom: var(--s-2); text-wrap: balance; }
 .section__sub { color: var(--text-muted); margin-bottom: var(--s-6); }
 
+/* Not applied inside About, whose heading sits in the text column and sets
+   its own spacing above the prose. */
 /* Sections with a sub-line get 32px between the heading and the content,
    because the sub carries it. About has no sub, so its heading sat 8px off
    its first paragraph -- the same heading with two different amounts of air
    under it depending on whether the next element happened to exist. The
    spacing belongs to the gap, not to whatever is filling it. */
-.section__title + .prose,
 .section__title + .skills,
 .section__title + .cards,
 .section__title + .contact { margin-top: var(--s-6); }
@@ -255,9 +256,21 @@ button:focus-visible {
 }
 @media (min-width: 800px) {
   .about {
-    grid-template-columns: 15rem 1fr;
+    grid-template-columns: 17rem 1fr;
     gap: var(--s-7);
-    align-items: start;
+    /* stretch, not start: the photo's column has to be as tall as the text
+       column for the image to fill it. `start` would collapse it to its own
+       content height, which is what made it stop short of the paragraphs. */
+    align-items: stretch;
+  }
+  /* Fills the column, top of the heading to the last line of text. object-fit
+     crops rather than distorts, and the position keeps the face in frame as
+     the text column grows or shrinks. */
+  .about__photo {
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: 50% 25%;
   }
 }
 
@@ -271,10 +284,10 @@ button:focus-visible {
   margin-inline: auto;
 }
 
-/* The About block is wider than the prose measure now, so the heading aligns
-   to the block's edge rather than to the paragraph column. */
-#about .section__title,
-#about .section__sub { max-width: 54rem; }
+/* The heading lives inside the text column now, so it needs no width of its
+   own -- the column already sets the edge it aligns to. */
+.about__body { min-width: 0; }
+.about__body .section__title { margin-bottom: var(--s-5); }
 
 /* Left-aligned, inside a centred block.
 

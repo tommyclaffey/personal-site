@@ -36,6 +36,7 @@
   --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
   --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 72px; --s-9: 112px;
 
+  --container: 1040px;   /* one page-wide column, used by every band */
   --radius: 10px;
   /* An absolute width, deliberately NOT ch. `ch` resolves against the
      element's own font-size, so 62ch means ~620px on 17px body text and
@@ -111,12 +112,12 @@ button:focus-visible {
    band itself would stop its background at the content edge, which is a
    stripe, not a band. */
 .nav, .footer > p {
-  max-width: 1040px;
+  max-width: var(--container);
   margin-inline: auto;
   padding-inline: var(--s-5);
 }
 .section > * {
-  max-width: 1040px;
+  max-width: var(--container);
   margin-inline: auto;
   padding-inline: var(--s-5);
 }
@@ -238,8 +239,6 @@ button:focus-visible {
    the text cannot be centred without giving every line a different starting
    point. So the heading moves. */
 #about { text-align: left; }
-#about .section__title { max-width: var(--measure); margin-inline: auto; }
-#about .section__sub { max-width: var(--measure); margin-inline: auto; }
 
 /* Photo left, text right, as one centred block.
 
@@ -251,8 +250,6 @@ button:focus-visible {
 .about {
   display: grid;
   gap: var(--s-6);
-  max-width: 54rem;
-  margin-inline: auto;
 }
 @media (min-width: 800px) {
   .about {

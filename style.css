@@ -470,6 +470,22 @@ button:focus-visible {
     /* A floor, so a short text column still gives the photo a sensible shape
        rather than collapsing it. */
     min-height: 22rem;
+
+    /* Both of these are undoing the narrow-layout rule, and both are load
+       bearing.
+
+       A grid item stretches to fill its track ONLY while its margins are not
+       auto. The narrow layout sets margin-inline: auto to centre a 240px
+       photo, and that quietly opted this box out of stretching -- so instead
+       of filling its 336px track it sized to its content. Its only content is
+       an absolutely positioned image, which contributes nothing, so the box
+       computed to 0px wide and the photo vanished while remaining loaded,
+       visible and opacity 1.
+
+       Nothing reported an error. The image was fine; the box around it was
+       zero. */
+    max-width: none;
+    margin-inline: 0;
   }
   .about__photo {
     position: absolute;

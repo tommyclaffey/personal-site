@@ -289,21 +289,20 @@ main > section { scroll-margin-top: var(--s-5); }
 
 .section { padding-block: var(--s-8); text-align: center; }
 
-/* The last section carries extra room below it, sized to the window.
+/* NO extra bottom padding here, deliberately.
 
-   Without it the page is shorter than (anchor position + window height), so
-   the browser physically cannot bring a lower section to the top -- it
-   scrolls as far as it can and stops. If you were already near the bottom
-   that means the page moves UP, which reads as a broken link. It is not the
-   link; it is that there is nothing left to scroll.
+   It was added so lower nav links could scroll their section to the very top
+   of the viewport -- on a tall window the page is shorter than (anchor
+   position + window height), so the browser scrolls as far as it can and
+   stops. The fix worked and cost 340px of empty tinted space at the bottom of
+   every visit.
 
-   vh rather than a fixed value, because how much is needed depends entirely
-   on the window height -- but capped at 340px, or a large monitor turns it
-   into a void. That cap is a trade: it covers windows up to roughly 1250px
-   tall, and past that the last sections still cannot reach the very top.
-   Buying those cases would cost more empty space than the problem is worth.
-   Every long single-page site has this; the fix is proportion, not perfection. */
-#contact { padding-bottom: max(var(--s-8), min(30vh, 340px)); }
+   That is the wrong trade. The void is visible to everyone, every time; the
+   imprecision is visible to someone who clicks a nav link on a very tall
+   window and notices they landed 200px off. Reverted.
+
+   scroll-margin-top stays -- it costs nothing and keeps a heading off the
+   top edge after a jump. */
 .section:nth-of-type(even) { background: var(--surface-sunken); }
 
 /* No borders anywhere. Every boundary is now a change of surface, and a rule

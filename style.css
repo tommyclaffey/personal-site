@@ -582,7 +582,7 @@ button:focus-visible {
 
      Letter-spacing stays: at 10px, caps set solid are harder to read, and the
      tracking is what keeps it legible rather than what makes it loud. */
-  font-size: 10px; font-weight: 400; letter-spacing: 0.06em;
+  font-size: 9px; font-weight: 400; letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--accent);
 }
 .card__title { font-size: 24px; text-align: center; }
@@ -590,11 +590,16 @@ button:focus-visible {
 /* Two links on one card, one on the others. margin-top: auto pins the row to
    the bottom of every card regardless, so the cards' link rows line up across
    the row even though their body copy differs in length. */
+/* Stacked, not inline. Two links separated by a dot read as one row of
+   equal options; stacked, the case study is clearly the primary and the code
+   the secondary. margin-top: auto still pins the block to the bottom, so the
+   rows line up across cards whose body copy differs in length. */
 .card__links {
   margin-top: auto; padding-top: var(--s-3);
-  font-size: 15px; text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--s-2);
+  font-size: 15px;
 }
-.card__sep { color: var(--text-subtle); margin-inline: var(--s-2); }
 .card__links a { font-weight: 500; }
 
 /* Text links are the easiest thing on a page to miss with a thumb. These get

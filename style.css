@@ -49,7 +49,7 @@
    no rule below this block knows which mode is active. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --surface: #14140F; --surface-raised: #1C1C16; --surface-sunken: #100F0B;
+    --surface: #14140F; --surface-raised: #1C1C16; --surface-sunken: #1A1A14;
     --text: #F2F0E9; --text-muted: #A8A69C; --text-subtle: #6E6C63;
     --border: #2C2B24;
     --accent: #6FC3A8; --accent-press: #8FD4BE; --accent-tint: #17332A;
@@ -101,7 +101,17 @@ button:focus-visible {
 
 /* =========================================================== layout ==== */
 
-.hero, .section, .footer > p {
+/* The hero and footer text are constrained directly. Sections are NOT --
+   they run the full viewport so their background can be a band, and their
+   direct children carry the measure instead. Constraining the section itself
+   would stop its background at the content edge, which is a stripe, not a
+   band. */
+.hero, .footer > p {
+  max-width: 1040px;
+  margin-inline: auto;
+  padding-inline: var(--s-5);
+}
+.section > * {
   max-width: 1040px;
   margin-inline: auto;
   padding-inline: var(--s-5);
@@ -175,7 +185,17 @@ button:focus-visible {
 
 /* ========================================================= sections ==== */
 
-.section { padding-block: var(--s-8); border-top: 1px solid var(--border); text-align: center; }
+/* Alternating bands rather than hairlines. A 1px rule separates sections in
+   the sense that a reader could find it if asked to; a change of surface
+   separates them at a glance, which is the actual job. */
+.section { padding-block: var(--s-8); text-align: center; }
+.section:nth-of-type(even) { background: var(--surface-sunken); }
+
+/* One rule, on the first section only. Everywhere else the colour change is
+   the boundary, and a border on top of it is the same statement twice. The
+   hero and About are both paper, so that seam is the one place a line is
+   doing work. */
+.section:first-of-type { border-top: 1px solid var(--border); }
 .section__title { font-size: clamp(26px, 3.5vw, 34px); margin-bottom: var(--s-2); }
 .section__sub { color: var(--text-muted); margin-bottom: var(--s-6); }
 
@@ -189,8 +209,12 @@ button:focus-visible {
   list-style: none; margin: 0; padding: 0;
 }
 
+/* Raised, not sunken. These used to be sunken tiles on a paper section; the
+   Skills band is now that same sunken colour, so a sunken tile on it would
+   have disappeared into its own background. */
 .skill {
-  background: var(--surface-sunken);
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: var(--s-5);
 }

@@ -46,7 +46,13 @@
 
   <section class="section" id="about">
     <h2 class="section__title">About</h2>
-    <div class="prose">
+    <div class="about">
+      <!-- width/height are the INTRINSIC pixel dimensions, not the rendered
+           size. The browser uses their ratio to reserve the right space before
+           the file arrives, so the text does not jump down when it loads. -->
+      <img class="about__photo" src="assets/tommy.jpg" width="703" height="1100"
+           alt="Tommy Claffey, standing in a studio">
+      <div class="prose">
       <p>
         I came to design from running businesses, which is why I care less about
         how a screen looks in isolation and more about whether an engineer can
@@ -64,6 +70,7 @@
         front-end code — React and TypeScript — because a system I can't build
         is a system I can't really argue for.
       </p>
+      </div>
     </div>
   </section>
 

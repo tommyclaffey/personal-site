@@ -240,6 +240,42 @@ button:focus-visible {
 #about .section__title { max-width: var(--measure); margin-inline: auto; }
 #about .section__sub { max-width: var(--measure); margin-inline: auto; }
 
+/* Photo left, text right, as one centred block.
+
+   grid-template-columns is only declared at the wide breakpoint. Below it the
+   grid is a single column and the photo stacks above the text -- which is the
+   correct order to fall back to, because the source order already puts the
+   photo first. Reordering with CSS would have made the visual order and the
+   reading order disagree for anyone using a screen reader. */
+.about {
+  display: grid;
+  gap: var(--s-6);
+  max-width: 54rem;
+  margin-inline: auto;
+}
+@media (min-width: 800px) {
+  .about {
+    grid-template-columns: 15rem 1fr;
+    gap: var(--s-7);
+    align-items: start;
+  }
+}
+
+.about__photo {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  /* The source is a 1003x1568 portrait. Constraining it on the narrow layout
+     stops a full-width face taking the whole first screen of the section. */
+  max-width: 15rem;
+  margin-inline: auto;
+}
+
+/* The About block is wider than the prose measure now, so the heading aligns
+   to the block's edge rather than to the paragraph column. */
+#about .section__title,
+#about .section__sub { max-width: 54rem; }
+
 /* Left-aligned, inside a centred block.
 
    Centring is fine for a heading or a one-line sub -- the eye takes those in
@@ -252,7 +288,6 @@ button:focus-visible {
    The BLOCK stays centred on the page. Only the text inside is aligned. */
 .prose {
   max-width: var(--measure);
-  margin-inline: auto;
   display: grid; gap: var(--s-5);
   color: var(--text-muted);
   text-align: left;

@@ -60,6 +60,11 @@
     --border: #2C2B24;
     --accent: #6FC3A8; --accent-press: #8FD4BE; --accent-tint: #17332A;
     --focus: #6FC3A8;
+    /* The nav reads dark-on-light in light mode. In dark mode the page is
+       already near-ink, so the same value would make the header disappear --
+       it lifts instead. Contrast is a relationship, not a colour. */
+    --ink: #2A2A22;
+    --paper-warm: #F2F0E9;
   }
 }
 
@@ -111,7 +116,7 @@ button:focus-visible {
    viewport, and their children carry the measure instead. Constraining the
    band itself would stop its background at the content edge, which is a
    stripe, not a band. */
-.nav, .footer > p {
+.footer > p {
   max-width: var(--container);
   margin-inline: auto;
   padding-inline: var(--s-5);
@@ -124,23 +129,48 @@ button:focus-visible {
 
 /* ============================================================== nav ==== */
 
-/* Links only. The name was here as a masthead AND immediately below as the
-   h1 — the same words twice in one viewport, which reads as a template that
-   was not finished rather than as branding. The h1 is the identity; a
-   single-page site does not need a wordmark pointing at content three inches
-   away. */
+/* Links only -- the h1 below is the identity, so no wordmark here.
+
+   The nav is its own band rather than transparent over the hero's tint. On a
+   tinted background with muted link colour it had almost no contrast against
+   anything: not against the surface behind it, and not against the hero it
+   sits above. A header that has to be hunted for is not doing its job.
+
+   Full-bleed like the other bands, so the background crosses the viewport and
+   the list inside carries the container width. */
+/* Dark, not white. White on the hero's warm tint is a 17-point difference --
+   technically a contrast, visually nothing, and it read as the same surface.
+   A header either reads as its own element or it should not have a background
+   at all; a barely-there one is the worst of both. */
 .nav {
-  display: flex; justify-content: center;
-  padding-block: var(--s-5);
+  background: var(--ink);
+  padding-block: var(--s-3);
 }
+/* ONE rule. This was two, and the second carried `margin: 0; padding: 0`,
+   which wiped the max-width centring set by the first -- the same shorthand
+   collision as the card grids. Two rules for one element is how that happens;
+   merging them removes the possibility rather than fixing the symptom. */
 .nav__list {
-  list-style: none; display: flex; flex-wrap: wrap; justify-content: center;
+  list-style: none;
+  display: flex; flex-wrap: wrap; justify-content: center;
   gap: var(--s-5);
-  margin: 0; padding: 0;
+  max-width: var(--container);
+  margin-block: 0; margin-inline: auto;
+  padding-block: 0; padding-inline: var(--s-5);
   font-size: 15px;
 }
-.nav__list a { color: var(--text-muted); text-decoration: none; }
-.nav__list a:hover { color: var(--text); }
+/* Light on dark. Not pure white -- paper-warm sits better against ink and
+   matches the page's own off-white rather than introducing a new one. */
+.nav__list a {
+  color: var(--paper-warm); text-decoration: none;
+  display: inline-flex; align-items: center;
+  min-height: 40px; padding-inline: var(--s-2);
+  border-radius: var(--radius);
+}
+.nav__list a:hover { color: #FFFFFF; background: rgb(255 255 255 / 0.10); }
+/* The focus ring is the accent green, which disappears on ink. On a dark
+   surface the ring has to be light to be a ring at all. */
+.nav__list a:focus-visible { outline-color: var(--paper-warm); }
 
 
 /* ============================================================= hero ==== */
@@ -152,7 +182,10 @@ button:focus-visible {
    glance rather than settled into, and at --measure it broke to four short
    centred lines. Wider gives three fuller ones. */
 .hero__body {
-  padding-block: var(--s-8) var(--s-9);
+  /* Bottom padding was 112px, sized for a four-line pitch. With a one-line
+     pitch the hero holds far less, and the same padding left a screen of dead
+     space under the buttons. Space should scale with what it surrounds. */
+  padding-block: var(--s-8) var(--s-8);
   max-width: 46rem;
   margin-inline: auto;
   text-align: center;
@@ -189,14 +222,20 @@ button:focus-visible {
 /* Balanced so the three lines come out near-equal instead of leaving a short
    orphan on the last one, which is the failure mode of centred display copy. */
 .hero__pitch {
-  font-size: clamp(17px, 2.2vw, 21px);
-  line-height: 1.5;
-  color: var(--text-secondary);
+  /* Larger than before. One short line has to hold the space a paragraph used
+     to, and at 21px it read as a caption under the name rather than as the
+     line the page is built around. */
+  font-size: clamp(19px, 2.6vw, 26px);
+  line-height: 1.4;
+  color: var(--text);
   text-wrap: balance;
 }
 .hero__pitch strong { color: var(--text); font-weight: 600; }
 
-.hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-3); margin-top: var(--s-7); }
+/* 32px, not 48. The buttons follow FROM the line above them -- they are the
+   next step in the same thought, so they sit closer to it than the pitch sits
+   to the name block. Equal gaps everywhere would flatten that. */
+.hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-3); margin-top: var(--s-6); }
 
 .btn {
   display: inline-flex; align-items: center;

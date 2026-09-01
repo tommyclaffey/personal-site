@@ -197,7 +197,7 @@ button:focus-visible {
      pitch the hero holds far less, and the same padding left a screen of dead
      space under the buttons. Space should scale with what it surrounds. */
   padding-block: var(--s-8) var(--s-8);
-  max-width: 46rem;
+  max-width: 42rem;
   margin-inline: auto;
   text-align: center;
 }
@@ -212,7 +212,10 @@ button:focus-visible {
    300px and a 320px phone offers 272px after padding -- the fluid middle was
    never the risk, the floor was. */
 .hero__name {
-  font-size: clamp(36px, 8vw, 84px);
+  /* Ceiling drops 84 -> 72. With the role line gone the name sits directly
+     over a 24px subhead, and 84 made that a 3.5x jump -- big enough that
+     everything under it read as small print rather than as the next level. */
+  font-size: clamp(36px, 7vw, 72px);
   letter-spacing: -0.02em;
   /* The pitch is the only thing under the name now, so the two are the unit.
      12px was tight because a small caps role line sat between them; with the
@@ -230,7 +233,7 @@ button:focus-visible {
   /* Larger than before. One short line has to hold the space a paragraph used
      to, and at 21px it read as a caption under the name rather than as the
      line the page is built around. */
-  font-size: clamp(19px, 2.6vw, 26px);
+  font-size: clamp(18px, 2.4vw, 24px);
   line-height: 1.4;
   color: var(--text);
   text-wrap: balance;
@@ -244,8 +247,11 @@ button:focus-visible {
 
 .btn {
   display: inline-flex; align-items: center;
-  min-height: 44px;                    /* the accessible minimum, not 36 */
-  padding: 0 var(--s-5);
+  /* 48, above the 44px accessible minimum rather than exactly on it. These
+     are the only two actions in the hero and they sat under a 72px name at
+     the size of body text -- correct by the rule and wrong by the page. */
+  min-height: 48px;
+  padding: 0 var(--s-6);
   border: 1px solid var(--border); border-radius: var(--radius);
   background: var(--surface-raised); color: var(--text);
   font: 500 15px var(--sans); text-decoration: none;

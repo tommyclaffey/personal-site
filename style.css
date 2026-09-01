@@ -242,10 +242,22 @@ button:focus-visible {
 
 /* Skills: auto-fit is right here. Six items divide evenly into 3, 2 or 1
    column, so whatever count the grid picks, no row is left short. */
+/* NOTE the block-axis-only resets below.
+
+   `.section > *` centres and gutters every direct child with margin-inline:
+   auto and padding-inline. A list reset written as the SHORTHAND `margin: 0;
+   padding: 0` sets all four sides, so it silently wiped both -- same
+   specificity, later in the file, so it won. The grids went
+   left-against-the-viewport-edge with no gutter, and the first card looked
+   clipped.
+
+   Nothing was overridden on purpose; a shorthand just reached further than
+   the property it was written for. Resetting only the axis being reset is
+   what keeps the layout rule intact. */
 .skills {
   display: grid; gap: var(--s-4);
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  list-style: none; margin: 0; padding: 0;
+  list-style: none; margin-block: 0; padding-block: 0;
 }
 
 /* Cards: THREE items, so this one needs a breakpoint and auto-fit is wrong.
@@ -259,7 +271,7 @@ button:focus-visible {
 .cards {
   display: grid; gap: var(--s-4);
   grid-template-columns: 1fr;
-  list-style: none; margin: 0; padding: 0;
+  list-style: none; margin-block: 0; padding-block: 0;
 }
 @media (min-width: 900px) {
   .cards { grid-template-columns: repeat(3, 1fr); }
@@ -301,7 +313,7 @@ button:focus-visible {
    a real 44px target and their own padding, so the tappable area matches what
    the eye reads as the control rather than just the glyphs. */
 .contact {
-  list-style: none; margin: 0; padding: 0;
+  list-style: none; margin-block: 0; padding-block: 0;
   display: flex; flex-wrap: wrap; justify-content: center;
   gap: var(--s-2) var(--s-3);
   font-size: 17px; font-weight: 500;

@@ -589,7 +589,7 @@ button:focus-visible {
    Stroke, not fill, and currentColor rather than a hardcoded value -- so the
    set inherits the accent and would follow a retheme without being touched. */
 .skill__icon {
-  width: 28px; height: 28px;
+  width: 36px; height: 36px;
   display: block; margin: 0 auto var(--s-3);
   /* Identical to .skill p, the paragraph directly beneath each heading. */
   color: var(--text-muted);
@@ -598,7 +598,11 @@ button:focus-visible {
   /* 1px. The hex already matched the paragraph text; a heavier stroke at 22px
      still reads darker than antialiased 15px type, so the weight is what makes
      them look different, not the colour. */
-  stroke-width: 1.25;
+  /* 1, not 1.25. Stroke is in viewBox units, so it scales with the icon --
+     at 36px a 1.25 stroke renders ~1.9px, noticeably heavier than it did at
+     28. Dropping to 1 keeps the rendered weight where it was (~1.5px) while
+     the shapes get bigger, which is the point. */
+  stroke-width: 1;
   stroke-linecap: round;
   stroke-linejoin: round;
 }

@@ -326,7 +326,28 @@ button:focus-visible {
 /* 32px, not 48. The buttons follow FROM the line above them -- they are the
    next step in the same thought, so they sit closer to it than the pitch sits
    to the name block. Equal gaps everywhere would flatten that. */
-.hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-3); margin-top: var(--s-6); }
+/* Equal-width buttons, without hardcoding a width.
+
+   Each button used to size itself to its own label, so "See the work" came out
+   wider than "Say hello". A min-width would fix the symptom and quietly break
+   the moment either label changed.
+
+   Two 1fr tracks inside a fit-content container instead: the grid shrinks to
+   its content, and 1fr splits that equally -- so both buttons take the width
+   of the longer one, whatever it happens to say. */
+.hero__actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-3);
+  width: fit-content;
+  margin: var(--s-6) auto 0;
+}
+
+/* Below this the pair is wider than the screen, so they stack full width
+   rather than being squeezed. */
+@media (max-width: 400px) {
+  .hero__actions { grid-template-columns: 1fr; width: 100%; }
+}
 
 .btn {
   display: inline-flex; align-items: center;

@@ -356,7 +356,13 @@ button:focus-visible {
      the size of body text -- correct by the rule and wrong by the page. */
   min-height: 48px;
   padding: 0 var(--s-6);
-  border: 1px solid var(--border); border-radius: var(--radius);
+  /* --text-subtle, not --border. The ghost button sat as a 1px #E4E0D6 line
+     on an #F3F0E9 hero -- about a shade apart, so its edge was barely
+     visible. Beside a solid green button that reads as one continuous object,
+     the same 160x48 box looked smaller and less round, because a filled shape
+     always reads larger than an outline of identical size. The geometry was
+     never the problem; the edge definition was. */
+  border: 1px solid var(--text-subtle); border-radius: var(--radius);
   background: var(--surface-raised); color: var(--text);
   font: 500 15px var(--sans); text-decoration: none;
   transition: background 120ms ease, border-color 120ms ease;

@@ -637,10 +637,32 @@ button:focus-visible {
    equal options; stacked, the case study is clearly the primary and the code
    the secondary. margin-top: auto still pins the block to the bottom, so the
    rows line up across cards whose body copy differs in length. */
+/* A fixed-height block, centred.
+
+   Growth has two links and the other two cards have one. With the block simply
+   pinned to the bottom, a single link lined up with Growth's SECOND link,
+   which made the row look like one card had an extra item bolted on top
+   rather than one card having two.
+
+   Reserving the height of two links and centring within it puts a lone link on
+   the midpoint between Growth's pair -- so a straight line across the row cuts
+   between them. */
 .card__links {
-  margin-top: auto; padding-top: var(--s-3);
-  display: flex; flex-direction: column; align-items: center;
+  margin-top: auto;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
   gap: var(--s-2);
+  /* Exactly the height of two links plus their gap, and NO padding-top.
+
+     Padding on one side only makes centring asymmetric: the block centres its
+     content inside the padding box, so a top-only pad pushes a lone link below
+     the midpoint of Growth's pair. Separation from the body copy comes from
+     the card's own column gap instead, which applies equally to every card. */
+  /* 58px = the measured height of Growth's two links plus their gap. Not
+     calculated from font-size and gap -- that gave 44 and left the single
+     links 7px low, because the links render taller than the arithmetic
+     suggested. Measured in the browser instead. */
+  min-height: 58px;
   font-size: 15px;
 }
 .card__links a { font-weight: 500; }
@@ -656,7 +678,11 @@ button:focus-visible {
 }
 .contact a {
   display: inline-flex; align-items: center;
-  min-height: 44px; padding-inline: var(--s-3);
+  /* 58px = the measured height of Growth's two links plus their gap. Not
+     calculated from font-size and gap -- that gave 44 and left the single
+     links 7px low, because the links render taller than the arithmetic
+     suggested. Measured in the browser instead. */
+  min-height: 58px; padding-inline: var(--s-3);
   border-radius: var(--radius);
 }
 .contact a:hover { background: var(--surface-raised); }

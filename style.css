@@ -591,18 +591,14 @@ button:focus-visible {
 .skill__icon {
   width: 22px; height: 22px;
   display: block; margin: 0 auto var(--s-3);
-  /* --text-muted, the same colour as the paragraph under each heading. The
-     accent green made six small marks the highest-contrast thing in the
-     section, so the eye landed on the icons before the words they label.
-     An icon supporting a heading should sit at or below the weight of the
-     text it supports. */
+  /* Identical to .skill p, the paragraph directly beneath each heading. */
   color: var(--text-muted);
   fill: none;
   stroke: currentColor;
-  /* 1.25, not 1.5. The colour already matches the card paragraphs; what made
-     the icons read darker than the text was stroke weight, not hue. Six marks
-     at 1.5 against 15px body copy sit heavier than the words they support. */
-  stroke-width: 1.25;
+  /* 1px. The hex already matched the paragraph text; a heavier stroke at 22px
+     still reads darker than antialiased 15px type, so the weight is what makes
+     them look different, not the colour. */
+  stroke-width: 1;
   stroke-linecap: round;
   stroke-linejoin: round;
 }

@@ -578,7 +578,10 @@ button:focus-visible {
   color: var(--text-muted);
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.5;
+  /* 1.25, not 1.5. The colour already matches the card paragraphs; what made
+     the icons read darker than the text was stroke weight, not hue. Six marks
+     at 1.5 against 15px body copy sit heavier than the words they support. */
+  stroke-width: 1.25;
   stroke-linecap: round;
   stroke-linejoin: round;
 }

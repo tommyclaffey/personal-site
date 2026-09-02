@@ -371,7 +371,14 @@ button:focus-visible {
 .btn--primary {
   background: var(--accent); border-color: var(--accent); color: #fff;
 }
+/* The second button IS the first button. Same .btn and .btn--primary, so it
+   inherits every box property -- padding, min-height, radius, border width,
+   font. This class changes three colours and nothing else, which makes a
+   size difference between them impossible rather than merely unlikely. */
 .btn--primary:hover { background: var(--accent-press); border-color: var(--accent-press); color: #fff; }
+
+.btn--white { background: #FFFFFF; border-color: #FFFFFF; color: var(--text); }
+.btn--white:hover { background: #FFFFFF; border-color: #FFFFFF; color: var(--text); filter: brightness(0.96); }
 
 /* ========================================================= sections ==== */
 

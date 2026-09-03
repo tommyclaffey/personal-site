@@ -28,13 +28,11 @@ wrong.
 - Skip link that is actually visible on focus
 - One `:focus-visible` style covering every interactive element
 - 44px minimum on buttons
-- Dark mode via `prefers-color-scheme` — no toggle needed, and no JavaScript
 - `prefers-reduced-motion` honoured
 
-**Dark mode without JavaScript.** Redefining the tier-2 token names inside one
-media query is the entire implementation. Nothing else in the stylesheet knows
-which mode is active, which is the payoff for having the token layer at all.
-
+**Light only.** `color-scheme: light` is declared rather than assumed — without
+it, a browser set to dark still darkens form controls, scrollbars and autofill,
+so the page renders half-inverted.
 ## Status
 
 Coursework. Not published anywhere.

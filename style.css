@@ -83,6 +83,12 @@
    ========================================================================= */
 
 :root {
+  /* Light only, declared rather than assumed. Without color-scheme a browser
+     set to dark still darkens form controls, scrollbars and autofill -- so the
+     page renders half-inverted: light surfaces with dark native chrome.
+     Declaring it keeps the page consistent on a dark-mode machine. */
+  color-scheme: light;
+
   /* --- tier 1: primitives ------------------------------------------- */
   --paper:      #FBFAF7;
   --paper-warm: #F3F0E9;
@@ -126,25 +132,6 @@
 
   --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --serif: Fraunces, Georgia, "Times New Roman", serif;
-}
-
-/* Dark mode is CSS only -- it follows whatever the reader already told their
-   operating system. There is no toggle, because a toggle needs JavaScript and
-   this page has none. Redefining the tier-2 names is the whole implementation;
-   no rule below this block knows which mode is active. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --surface: #14140F; --surface-raised: #1C1C16; --surface-sunken: #1A1A14;
-    --text: #F2F0E9; --text-muted: #A8A69C; --text-subtle: #6E6C63;
-    --border: #2C2B24;
-    --accent: #6FC3A8; --accent-press: #8FD4BE; --accent-tint: #17332A;
-    --focus: #6FC3A8;
-    /* The nav reads dark-on-light in light mode. In dark mode the page is
-       already near-ink, so the same value would make the header disappear --
-       it lifts instead. Contrast is a relationship, not a colour. */
-    --ink: #2A2A22;
-    --paper-warm: #F2F0E9;
-  }
 }
 
 /* ============================================================ base ==== */
